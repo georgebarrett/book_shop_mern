@@ -1,4 +1,5 @@
 import express from "express";
+import { PORT } from "./config.js";
 
 const app = express();
 
@@ -7,7 +8,6 @@ app.get('/', (request, response) => {
     return response.status(234).send('Croeso');
 });
 
-app.listen(5555, () => {
-    console.log("5555")
+app.listen(PORT, () => {
+    console.log(`${PORT}`)
 });
-
