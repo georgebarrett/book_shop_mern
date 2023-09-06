@@ -82,11 +82,27 @@ app.put('/books/:id', async (request, response) => {
         if (!result) {
             return response.status(404).json({ message: 'Book not found.' });
         }
-        return response.status(200).json({ message: 'Book data updated.' });
+        return response.status(200).send({ message: 'Book data updated.' });
 
     } catch (error) {
         console.log(error.message);
         response.status(500).send({ message: error.message })
+    }
+});
+
+app.delete('/books/:id', async (request, response) => {
+    try {
+        const { id } = request.params;
+        const result = await Book.findByIdAndDelete(id);
+
+        if (!result) {
+            return response.status(404).json({ message: 'Book not found.' })
+        }
+        return response.status(200).send({ message: 'Book has been deleted.' })
+
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({ message: error.message });
     }
 });
 
