@@ -7,13 +7,13 @@ import cors from "cors";
 
 const app = express();
 
-// app.use(cors());
+app.use(cors());
 
-app.use(cors({
-    origin: 'http://localhost:5555',
-    methods: ['GET', 'POST', 'DELETE', 'PUT'],
-    allowedHeaders: ['Content-Type']
-}));
+// app.use(cors({
+//     origin: 'http://localhost:5555',
+//     methods: ['GET', 'POST', 'DELETE', 'PUT'],
+//     allowedHeaders: ['Content-Type']
+// }));
 
 app.use(express.json());
 
