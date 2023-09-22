@@ -1,24 +1,27 @@
 import mongoose from "mongoose";
 import { Book } from "../models/bookModel";
 
-const { MongoMemoryServer } = require('mongodb-memory-server');
+import { MongoMemoryServer } from "mongodb-memory-server";
 
-let mongoServer;
+// const { MongoMemoryServer } = require('mongodb-memory-server');
+
+
 
 beforeAll(async () => {
-    mongoServer = new MongoMemoryServer(); // Corrected the instantiation
-    const uri = await mongoServer.getUri(); // Added await as it's asynchronous
-    await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-}, 10000); // Increased the timeout to 10 seconds
+    const mongoServer = await MongoMemoryServer.create();
+    console.log('mongoServer', mongoServer)
+    const uri = mongoServer.getUri(); 
+    await mongoose.connect(uri);
+});
 
 afterEach(async () => {
     await mongoose.connection.dropDatabase();
-}, 10000);
+});
 
 afterAll(async () => {
     await mongoose.disconnect();
-    await mongoServer.stop(); // Changed from disconnect() to stop()
-}, 10000);
+    await mongoServer.stop();
+});
 
 describe('Book Model,', () => {
 
