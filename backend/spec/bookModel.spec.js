@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Book } from "../models/bookModel";
+import Book from "../models/bookModel";
 import { MongoMemoryServer } from "mongodb-memory-server";
 
 let mongoServer;
